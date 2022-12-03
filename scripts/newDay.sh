@@ -6,7 +6,7 @@ if [ $? -ne 0 ] ; then
   exit
 fi
 
-echo "export const day$1 = () => {
+echo "export const day$1 = (input: string[]) => {
   return $1;
 };" >> src/day$1/day$1.ts
 
@@ -19,11 +19,11 @@ import { logAnswer } from '../utils/logging';
 }); */
 
 test('Provided test cases', () => {
-  expect(day$1(testData)).toBe($1);
+  expect(day$1(testData as string[])).toBe($1);
 });
 
 test('Returns an answer', () => {
-  logAnswer(day$1(data));
+  logAnswer(day$1(data as string[]));
 });" >> src/day$1/day$1.test.ts
 
 echo "import { parseInput } from '../utils/input';
