@@ -4,13 +4,13 @@ export const day3 = (input: string[]) => {
     const splitRucksack = rucksack.split('');
     const firstRucksack = splitRucksack.slice(0, rucksack.length / 2);
     const secondRucksack = splitRucksack.slice(rucksack.length / 2);
-    const map = new Map<string, number>();
+    const set = new Set<string>();
     let repeated = '';
     firstRucksack.forEach((char) => {
-      map.set(char, 1);
+      set.add(char);
     });
     secondRucksack.forEach((char) => {
-      if (map.has(char)) {
+      if (set.has(char)) {
         repeated = char;
       }
     });
@@ -20,6 +20,7 @@ export const day3 = (input: string[]) => {
 };
 
 export const getPriority = (item: string) => {
-  if (item.charCodeAt(0) <= 90) return item.charCodeAt(0) - 38;
-  return item.charCodeAt(0) - 96;
+  if (item.charCodeAt(0) <= 'Z'.charCodeAt(0))
+    return item.charCodeAt(0) - 'A'.charCodeAt(0) + 27;
+  return item.charCodeAt(0) - ('a'.charCodeAt(0) - 1);
 };

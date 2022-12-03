@@ -1,5 +1,5 @@
 export const day1part2 = (input: string[]) => {
-  let topThree = [0, 0, 0].sort((a, b) => b - a);
+  let topThree = [0, 0, 0];
   input.forEach((foodList) => {
     const foodArray = foodList.split('\n');
     const calorieSum = foodArray.reduce<number>(
@@ -11,7 +11,6 @@ export const day1part2 = (input: string[]) => {
       topThree.push(calorieSum);
       topThree.sort((a, b) => b - a);
     }
-    console.log(topThree);
   });
   return topThree.reduce<number>(
     (acc, calIntake) => acc + Number(calIntake),
