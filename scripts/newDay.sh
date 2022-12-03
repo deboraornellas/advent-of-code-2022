@@ -11,21 +11,26 @@ echo "export const day$1 = () => {
 };" >> src/day$1/day$1.ts
 
 echo "import { day$1 } from './day$1';
+import { data, testData } from './day$1.data';
 import { logAnswer } from '../utils/logging';
 
-test('Provided test cases', () => {
+/* test('Personal test cases', () => {
   expect(day$1()).toBe($1);
+}); */
+
+test('Provided test cases', () => {
+  expect(day$1(testData)).toBe($1);
 });
 
 test('Returns an answer', () => {
-  logAnswer(day$1());
-  expect(typeof day$1()).toBe('number');
-  expect(day$1()).toBeGreaterThan(0);
+  logAnswer(day$1(data));
 });" >> src/day$1/day$1.test.ts
 
 echo "import { parseInput } from '../utils/input';
 
-const input = '';
+const input = ``;
+const testInput = ``;
 
-export const data = parseInput(input);" >> src/day$1/day$1.data.ts
+export const data = parseInput(input);
+export const testData = parseInput(testInput);" >> src/day$1/day$1.data.ts
 exit
