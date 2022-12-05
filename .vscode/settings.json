@@ -1,9 +1,6 @@
 {
   "editor.formatOnSave": true,
   "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  }
+  "files.trimTrailingWhitespace": false,
+  "files.insertFinalNewline": true
 }
