@@ -19,9 +19,14 @@ export const parseInput = (
   input: string,
   delimiter?: string,
   trimmed: boolean = true,
+  parsedToNumber: boolean = true,
 ) => {
-  const inputArray = input.split(delimiter || getDelimiter(input));
-  if (!trimmed) return mapToNumberIfNecessary(inputArray);
-  const trimmedArray = inputArray.map((e) => e.trim());
-  return mapToNumberIfNecessary(trimmedArray);
+  let inputArray: string[] | number[] = input.split(
+    delimiter || getDelimiter(input),
+  );
+  if (trimmed) {
+    inputArray = inputArray.map((e) => e.trim());
+  }
+  if (parsedToNumber) inputArray = mapToNumberIfNecessary(inputArray);
+  return inputArray;
 };
