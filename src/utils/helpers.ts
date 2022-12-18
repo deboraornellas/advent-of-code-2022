@@ -54,3 +54,10 @@ export const parseMoveCommands = (commandInput: string) => {
   });
   return commands;
 };
+
+export const compareArrays = (
+  arr1: number[] | string[],
+  arr2: number[] | string[],
+) => {
+  return JSON.stringify(arr1) === JSON.stringify(arr2);
+};
