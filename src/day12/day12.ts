@@ -1,25 +1,24 @@
 export const day12 = (input: string[]) => {
   const charMatrix = input.map((str) => str.split(''));
-  const numMatrix = input.map((str) =>
-    str.split('').map((x) => Number.MAX_SAFE_INTEGER),
-  );
+  const numMatrix = input.map((str) => str.split('').map((_) => 0));
   let initialPos = findCharIndexInMatrix(charMatrix, 'S');
   let goalPos = findCharIndexInMatrix(charMatrix, 'E');
   let pos = initialPos;
   charMatrix[pos[0]][pos[1]] = 'a';
   numMatrix[pos[0]][pos[1]] = 0;
-  let allVisited = [];
+  let allVisited: string[] = [];
   let queue = [JSON.stringify(pos)];
 
-  while (queue.length !== 0) {
-    pos = JSON.parse(queue.pop() || JSON.stringify(initialPos));
+  while (JSON.stringify(pos) !== JSON.stringify(goalPos)) {
     allVisited.push(JSON.stringify(pos));
-    const neighbors = possibleNextPositions(charMatrix, pos);
+    const neighbors = possibleNextPositions(charMatrix, pos).filter(
+      (n) => !allVisited.includes(JSON.stringify(n)),
+    );
 
     for (const neighbor of neighbors) {
-      if (numMatrix[neighbor[0]][neighbor[1]] > numMatrix[pos[0]][pos[1]] + 1) {
-        numMatrix[neighbor[0]][neighbor[1]] = numMatrix[pos[0]][pos[1]] + 1;
-      }
+      numMatrix[neighbor[0]][neighbor[1]] = numMatrix[pos[0]][pos[1]] + 1;
+      if (JSON.stringify(neighbor) === JSON.stringify(goalPos))
+        numMatrix[goalPos[0]][goalPos[1]];
       if (
         !allVisited.includes(JSON.stringify(neighbor)) &&
         !queue.includes(JSON.stringify(neighbor))
@@ -32,6 +31,7 @@ export const day12 = (input: string[]) => {
         numMatrix[JSON.parse(a)[0]][JSON.parse(a)[1]] -
         numMatrix[JSON.parse(b)[0]][JSON.parse(b)[1]],
     );
+    pos = JSON.parse(queue.pop() || JSON.stringify(initialPos));
   }
   return numMatrix[goalPos[0]][goalPos[1]];
 };
