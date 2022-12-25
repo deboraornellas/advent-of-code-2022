@@ -1,3 +1,5 @@
+import { findAllArrayCombinations } from '../utils/helpers';
+
 export const day16part2 = (input: string[]) => {
   const parsedInput = input.map((line) => {
     const parsedLine: (number | string | string[])[] = line
@@ -25,7 +27,7 @@ const findAndCalculateAllPairs = (
   profundityMap: Record<string, Record<string, number>>,
 ) => {
   let ans = 0;
-  const allCombinations = findAllCombinationsWithSizeN(arr, 0, []);
+  const allCombinations = findAllArrayCombinations(arr, 0, []);
   for (let i = 0; i < allCombinations.length; i++) {
     const parsedPerm = allCombinations[i];
     const remaining = arr.filter((item) => !parsedPerm.includes(item));
@@ -53,36 +55,6 @@ const findAndCalculateAllPairs = (
     }
   }
   return ans;
-};
-
-const findAllCombinationsWithSizeN = (
-  arr: string[],
-  index: number,
-  out: string[][],
-): string[][] => {
-  const n = arr.length;
-  if (index >= n) return out;
-  const newOut = [];
-
-  if (out.length === 0) {
-    const item1: string[] = [];
-    const item2 = [arr[index]];
-    item1.length <= n / 2 &&
-      newOut.push(...findAllCombinationsWithSizeN(arr, index + 1, [item1]));
-    item2.length <= n / 2 &&
-      newOut.push(...findAllCombinationsWithSizeN(arr, index + 1, [item2]));
-  }
-
-  for (let item of out) {
-    const item1 = [...item];
-    const item2 = [...item1, arr[index]];
-    item1.length <= n / 2 &&
-      newOut.push(...findAllCombinationsWithSizeN(arr, index + 1, [item]));
-    item2.length <= n / 2 &&
-      newOut.push(...findAllCombinationsWithSizeN(arr, index + 1, [item2]));
-  }
-
-  return newOut;
 };
 
 type Tunnel = {

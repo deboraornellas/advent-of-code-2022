@@ -61,3 +61,34 @@ export const compareArrays = (
 ) => {
   return JSON.stringify(arr1) === JSON.stringify(arr2);
 };
+
+export const findAllArrayCombinations = (
+  arr: string[],
+  index: number,
+  out: string[][],
+  onlyHalf?: boolean,
+): string[][] => {
+  const n = arr.length;
+  if (index >= n) return out;
+  const newOut = [];
+
+  if (out.length === 0) {
+    const item1: string[] = [];
+    const item2 = [arr[index]];
+    item1.length <= (onlyHalf ? n / 2 : n) &&
+      newOut.push(...findAllArrayCombinations(arr, index + 1, [item1]));
+    item2.length <= (onlyHalf ? n / 2 : n) &&
+      newOut.push(...findAllArrayCombinations(arr, index + 1, [item2]));
+  }
+
+  for (let item of out) {
+    const item1 = [...item];
+    const item2 = [...item1, arr[index]];
+    item1.length <= n / 2 &&
+      newOut.push(...findAllArrayCombinations(arr, index + 1, [item]));
+    item2.length <= n / 2 &&
+      newOut.push(...findAllArrayCombinations(arr, index + 1, [item2]));
+  }
+
+  return newOut;
+};
