@@ -92,3 +92,17 @@ export const findAllArrayCombinations = (
 
   return newOut;
 };
+
+export const getNextFromArray = <T>(arr: T[], index: number): T => {
+  if (index + 1 >= arr.length) {
+    return arr[0];
+  }
+  return arr[index + 1];
+};
+
+export const getNextIndexFromArray = <T>(arr: T[], index: number): number => {
+  if (index + 1 >= arr.length) {
+    return 0;
+  }
+  return index + 1;
+};
