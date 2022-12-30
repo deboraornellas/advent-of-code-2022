@@ -106,3 +106,10 @@ export const getNextIndexFromArray = <T>(arr: T[], index: number): number => {
   }
   return index + 1;
 };
+
+export const getPastIndexFromArray = <T>(arr: T[], index: number): number => {
+  if (index - 1 < 0) {
+    return arr.length - 1;
+  }
+  return index - 1;
+};
